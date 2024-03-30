@@ -1,14 +1,10 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
 import Link from 'next/link'
 
 const navigation = [
     { name: 'Nosotros', href: '#', current: false },
+    { name: 'Áreas', href: '#', current: false },
     { name: 'Publicaciones', href: '#', current: false },
-    { name: 'Areas', href: '#', current: false },
-    { name: 'Entrevistas', href: '#', current: false },
+    { name: 'Artículos', href: '#', current: false },
     { name: 'Contacto', href: '/contacto', current: false },
 ]
 
@@ -17,32 +13,29 @@ function classNames(...classes: string[]) {
 }
 
 export default function Navbar() {
-  return (
-    <div className="w-full bg-white">
-        <div className="mx-auto max-w-7xl flex flex-row justify-between px-2 py-4 sm:px-6 lg:px-8">
-            <Link href="/">
-                <Image src="/logo.png" alt="Pensando Venezuela" width={150} height={80} />  
-            </Link>
-            <div className='flex flex-row items-center'>
-                <div className="hidden sm:block sm:ml-6">
-                    <div className="flex space-x-4">
-                        {navigation.map((item) => (
-                            <Link 
-                                key={item.name}
-                                href={item.href}
-                                className={classNames(
-                                    item.current ? 'bg-gray-900 text-white' : 'text-gray-900 hover:bg-gray-700 hover:text-white',
-                                    'px-3 py-2 rounded-md text-sm font-medium'
-                                )}
-                                aria-current={item.current ? 'page' : undefined}
-                                >
-                                    {item.name}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+    return (
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-1 justify-around space-x-4 px-4 py-2 bg-Blue sticky top-0 z-10">
+            {/* Navbar Links */}
+            {navigation.map((item) => (
+                <Link
+                    key={item.name}
+                    href={item.href}
+                    className={classNames(
+                        item.current ? 'text-white' : 'text-white',
+                        ' rounded-md text-lg text-center font-medium marginLeft0'
+                    )}
+                    aria-current={item.current ? 'page' : undefined}
+                >
+                    {item.name}
+                </Link>
+            ))}
+
+            {/* Search Button */}
+            <div className='flex justify-center w-full marginLeft0'>
+                <button className='w-[120px] m-auto text-white font-bold px-3 py-1 rounded-3xl text-xl bg-Red'>Buscar</button>
             </div>
+
         </div>
-    </div>
-  )
+    )
 }
